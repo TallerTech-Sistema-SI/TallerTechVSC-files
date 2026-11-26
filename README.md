@@ -43,7 +43,7 @@ Hecho en C# (WinForms, .NET Framework 4.7.2) con SQL Server y Entity Framework 6
 | RF-14 | Filtro de órdenes por rango de fechas | FrmConsultaOrdenes | NOrdenServicio / DOrdenServicio |
 | RF-15 | Búsqueda de repuestos | FrmRepuesto | NRepuesto / DRepuesto |
 
-Otros archivos: Form1 (menú principal).
+Otros archivos de Presentacion: Form1 (ventana principal con menú lateral y escritorio; los formularios se abren dentro de ella) y Tema.cs (colores y estilo común de botones y tablas).
 
 ## Ramas
 
