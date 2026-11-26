@@ -22,9 +22,8 @@ namespace Presentacion
             InitializeComponent();
         }
 
-        void ActualizarDataGridView()
+        void OcultarColumnas()
         {
-            dgvrepuestos.DataSource = objnegrepuesto.Listarrepuestos();
             if (dgvrepuestos.Columns["ID_Repuesto"] != null)
             {
                 dgvrepuestos.Columns["ID_Repuesto"].Visible = false;
@@ -49,8 +48,15 @@ namespace Presentacion
             {
                 dgvrepuestos.Columns["Detalle_Repuesto"].Visible = false;
             }
+        }
+
+        void ActualizarDataGridView()
+        {
+            dgvrepuestos.DataSource = objnegrepuesto.Listarrepuestos();
+            OcultarColumnas();
             btnmodificar.Enabled = false;
             btneliminar.Enabled = false;
+            txtbuscar.Text = "";
             txtcodigo.Text = "";
             txtnombre.Text = "";
             txtmarca.Text = "";
@@ -190,6 +196,24 @@ namespace Presentacion
                 string mensaje = objnegrepuesto.Eliminarrepuesto(id);
                 MessageBox.Show(mensaje);
                 ActualizarDataGridView();
+            }
+        }
+
+        private void btnbuscar_Click(object sender, EventArgs e)
+        {
+            if (txtbuscar.Text.Trim() == "")
+            {
+                MessageBox.Show("Ingrese un nombre o codigo para buscar.");
+                return;
+            }
+            List<Repuesto> encontrados = objnegrepuesto.Buscarrepuestos(txtbuscar.Text);
+            dgvrepuestos.DataSource = encontrados;
+            OcultarColumnas();
+            btnmodificar.Enabled = false;
+            btneliminar.Enabled = false;
+            if (encontrados.Count == 0)
+            {
+                MessageBox.Show("No se encontraron repuestos con ese nombre o codigo.");
             }
         }
 
