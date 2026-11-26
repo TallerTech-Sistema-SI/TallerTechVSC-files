@@ -35,13 +35,20 @@ namespace Presentacion
         void BuscarOrdenes(string estado)
         {
             List<OrdenServicio> lista = null;
-            if (estado == "Todos")
+            if (chkfechas.Checked)
             {
-                lista = objnegorden.Listarordenes();
+                lista = objnegorden.Listarordenesporestadoyfechas(estado, dtpdesde.Value, dtphasta.Value);
             }
             else
             {
-                lista = objnegorden.Listarordenesporestado(estado);
+                if (estado == "Todos")
+                {
+                    lista = objnegorden.Listarordenes();
+                }
+                else
+                {
+                    lista = objnegorden.Listarordenesporestado(estado);
+                }
             }
 
             dgvordenes.AllowUserToAddRows = false;
@@ -95,15 +102,30 @@ namespace Presentacion
         private void FrmConsultaOrdenes_Load(object sender, EventArgs e)
         {
             CargarFiltros();
+            dtpdesde.Value = DateTime.Today.AddMonths(-1);
+            dtphasta.Value = DateTime.Today;
+            dtpdesde.Enabled = false;
+            dtphasta.Enabled = false;
             BuscarOrdenes("Todos");
         }
 
         private void btnbuscar_Click(object sender, EventArgs e)
         {
+            if (chkfechas.Checked && dtpdesde.Value.Date > dtphasta.Value.Date)
+            {
+                MessageBox.Show("La fecha desde no puede ser mayor a la fecha hasta.");
+                return;
+            }
             if (cboxfiltroestado.SelectedItem != null)
             {
                 BuscarOrdenes(cboxfiltroestado.SelectedItem.ToString());
             }
+        }
+
+        private void chkfechas_CheckedChanged(object sender, EventArgs e)
+        {
+            dtpdesde.Enabled = chkfechas.Checked;
+            dtphasta.Enabled = chkfechas.Checked;
         }
 
         private void btnsalir_Click(object sender, EventArgs e)
