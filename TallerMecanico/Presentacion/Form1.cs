@@ -80,6 +80,12 @@ namespace Presentacion
             frm.ShowDialog();
         }
 
+        private void mnuReporteMecanico_Click(object sender, EventArgs e)
+        {
+            FrmReporteMecanico frm = new FrmReporteMecanico();
+            frm.ShowDialog();
+        }
+
         private void mnuHistorialVehiculo_Click(object sender, EventArgs e)
         {
             FrmHistorialVehiculo frm = new FrmHistorialVehiculo();
@@ -107,6 +113,7 @@ namespace Presentacion
                 mnuRegistrarMecanico.Enabled = false;
                 mnuRegistrarRepuesto.Enabled = false;
                 mnuResumenIngresos.Enabled = false;
+                mnuReporteMecanico.Enabled = false;
             }
         }
     }

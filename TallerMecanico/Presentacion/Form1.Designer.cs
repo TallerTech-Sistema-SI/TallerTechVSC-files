@@ -31,6 +31,7 @@ namespace Presentacion
             this.mnuConsultaRepuestos = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuResumenIngresos = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHistorialVehiculo = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuReporteMecanico = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -118,7 +119,8 @@ namespace Presentacion
             this.mnuConsultaOrdenes,
             this.mnuConsultaRepuestos,
             this.mnuResumenIngresos,
-            this.mnuHistorialVehiculo});
+            this.mnuHistorialVehiculo,
+            this.mnuReporteMecanico});
             this.mnuConsultas.Name = "mnuConsultas";
             this.mnuConsultas.Size = new System.Drawing.Size(71, 20);
             this.mnuConsultas.Text = "Consultas";
@@ -150,6 +152,13 @@ namespace Presentacion
             this.mnuHistorialVehiculo.Size = new System.Drawing.Size(243, 22);
             this.mnuHistorialVehiculo.Text = "Historial de Vehiculo";
             this.mnuHistorialVehiculo.Click += new System.EventHandler(this.mnuHistorialVehiculo_Click);
+            // 
+            // mnuReporteMecanico
+            // 
+            this.mnuReporteMecanico.Name = "mnuReporteMecanico";
+            this.mnuReporteMecanico.Size = new System.Drawing.Size(243, 22);
+            this.mnuReporteMecanico.Text = "Reporte de Ordenes por Mecanico";
+            this.mnuReporteMecanico.Click += new System.EventHandler(this.mnuReporteMecanico_Click);
             // 
             // mnuSalir
             // 
@@ -194,6 +203,7 @@ namespace Presentacion
         private System.Windows.Forms.ToolStripMenuItem mnuConsultaRepuestos;
         private System.Windows.Forms.ToolStripMenuItem mnuResumenIngresos;
         private System.Windows.Forms.ToolStripMenuItem mnuHistorialVehiculo;
+        private System.Windows.Forms.ToolStripMenuItem mnuReporteMecanico;
         private System.Windows.Forms.ToolStripMenuItem mnuSalir;
     }
 }
