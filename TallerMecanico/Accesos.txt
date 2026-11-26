@@ -1,0 +1,7 @@
+c:\Users\Usuario\Downloads\TF_XXXXXX.docxAcceso Administrador
+Usuario: admin
+Contrasena: 123
+
+Acceso Recepcionista
+Usuario: recepcion
+Contrasena: 123
