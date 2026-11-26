@@ -21,6 +21,11 @@ namespace Presentacion
             this.lblfiltro = new System.Windows.Forms.Label();
             this.cboxfiltroestado = new System.Windows.Forms.ComboBox();
             this.btnbuscar = new System.Windows.Forms.Button();
+            this.chkfechas = new System.Windows.Forms.CheckBox();
+            this.lbldesde = new System.Windows.Forms.Label();
+            this.dtpdesde = new System.Windows.Forms.DateTimePicker();
+            this.lblhasta = new System.Windows.Forms.Label();
+            this.dtphasta = new System.Windows.Forms.DateTimePicker();
             this.dgvordenes = new System.Windows.Forms.DataGridView();
             this.lbltotalordenes = new System.Windows.Forms.Label();
             this.btnsalir = new System.Windows.Forms.Button();
@@ -70,18 +75,68 @@ namespace Presentacion
             this.btnbuscar.UseVisualStyleBackColor = true;
             this.btnbuscar.Click += new System.EventHandler(this.btnbuscar_Click);
             // 
+            // chkfechas
+            // 
+            this.chkfechas.AutoSize = true;
+            this.chkfechas.Location = new System.Drawing.Point(19, 88);
+            this.chkfechas.Margin = new System.Windows.Forms.Padding(2);
+            this.chkfechas.Name = "chkfechas";
+            this.chkfechas.Size = new System.Drawing.Size(106, 17);
+            this.chkfechas.TabIndex = 7;
+            this.chkfechas.Text = "Filtrar por fechas";
+            this.chkfechas.UseVisualStyleBackColor = true;
+            this.chkfechas.CheckedChanged += new System.EventHandler(this.chkfechas_CheckedChanged);
+            // 
+            // lbldesde
+            // 
+            this.lbldesde.AutoSize = true;
+            this.lbldesde.Location = new System.Drawing.Point(150, 90);
+            this.lbldesde.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbldesde.Name = "lbldesde";
+            this.lbldesde.Size = new System.Drawing.Size(38, 13);
+            this.lbldesde.TabIndex = 8;
+            this.lbldesde.Text = "Desde:";
+            // 
+            // dtpdesde
+            // 
+            this.dtpdesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpdesde.Location = new System.Drawing.Point(195, 86);
+            this.dtpdesde.Margin = new System.Windows.Forms.Padding(2);
+            this.dtpdesde.Name = "dtpdesde";
+            this.dtpdesde.Size = new System.Drawing.Size(95, 20);
+            this.dtpdesde.TabIndex = 9;
+            // 
+            // lblhasta
+            // 
+            this.lblhasta.AutoSize = true;
+            this.lblhasta.Location = new System.Drawing.Point(305, 90);
+            this.lblhasta.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblhasta.Name = "lblhasta";
+            this.lblhasta.Size = new System.Drawing.Size(35, 13);
+            this.lblhasta.TabIndex = 10;
+            this.lblhasta.Text = "Hasta:";
+            // 
+            // dtphasta
+            // 
+            this.dtphasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtphasta.Location = new System.Drawing.Point(345, 86);
+            this.dtphasta.Margin = new System.Windows.Forms.Padding(2);
+            this.dtphasta.Name = "dtphasta";
+            this.dtphasta.Size = new System.Drawing.Size(95, 20);
+            this.dtphasta.TabIndex = 11;
+            // 
             // dgvordenes
             // 
             this.dgvordenes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvordenes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvordenes.Location = new System.Drawing.Point(19, 98);
+            this.dgvordenes.Location = new System.Drawing.Point(19, 120);
             this.dgvordenes.Margin = new System.Windows.Forms.Padding(2);
             this.dgvordenes.Name = "dgvordenes";
             this.dgvordenes.ReadOnly = true;
             this.dgvordenes.RowHeadersWidth = 51;
-            this.dgvordenes.Size = new System.Drawing.Size(525, 203);
+            this.dgvordenes.Size = new System.Drawing.Size(525, 181);
             this.dgvordenes.TabIndex = 4;
             this.dgvordenes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvordenes_CellContentClick);
             // 
@@ -115,6 +170,11 @@ namespace Presentacion
             this.Controls.Add(this.btnsalir);
             this.Controls.Add(this.lbltotalordenes);
             this.Controls.Add(this.dgvordenes);
+            this.Controls.Add(this.dtphasta);
+            this.Controls.Add(this.lblhasta);
+            this.Controls.Add(this.dtpdesde);
+            this.Controls.Add(this.lbldesde);
+            this.Controls.Add(this.chkfechas);
             this.Controls.Add(this.btnbuscar);
             this.Controls.Add(this.cboxfiltroestado);
             this.Controls.Add(this.lblfiltro);
@@ -137,6 +197,11 @@ namespace Presentacion
         private System.Windows.Forms.ComboBox cboxfiltroestado;
         private System.Windows.Forms.Button btnbuscar;
         private System.Windows.Forms.DataGridView dgvordenes;
+        private System.Windows.Forms.CheckBox chkfechas;
+        private System.Windows.Forms.Label lbldesde;
+        private System.Windows.Forms.DateTimePicker dtpdesde;
+        private System.Windows.Forms.Label lblhasta;
+        private System.Windows.Forms.DateTimePicker dtphasta;
         private System.Windows.Forms.Label lbltotalordenes;
         private System.Windows.Forms.Button btnsalir;
     }
