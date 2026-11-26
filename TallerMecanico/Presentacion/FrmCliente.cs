@@ -38,9 +38,8 @@ namespace Presentacion
             return true;
         }
 
-        void ActualizarDataGridView()
+        void OcultarColumnas()
         {
-            dgvclientes.DataSource = objnegcliente.Listarclientes();
             if (dgvclientes.Columns["ID_Cliente"] != null)
             {
                 dgvclientes.Columns["ID_Cliente"].Visible = false;
@@ -65,8 +64,15 @@ namespace Presentacion
             {
                 dgvclientes.Columns["Vehiculo"].Visible = false;
             }
+        }
+
+        void ActualizarDataGridView()
+        {
+            dgvclientes.DataSource = objnegcliente.Listarclientes();
+            OcultarColumnas();
             btnmodificar.Enabled = false;
             btneliminar.Enabled = false;
+            txtbuscar.Text = "";
             txtdniruc.Text = "";
             txtnombre.Text = "";
             txttelefono.Text = "";
@@ -188,6 +194,24 @@ namespace Presentacion
                 string mensaje = objnegcliente.Eliminarcliente(id);
                 MessageBox.Show(mensaje);
                 ActualizarDataGridView();
+            }
+        }
+
+        private void btnbuscar_Click(object sender, EventArgs e)
+        {
+            if (txtbuscar.Text.Trim() == "")
+            {
+                MessageBox.Show("Ingrese un DNI/RUC o un nombre para buscar.");
+                return;
+            }
+            List<Cliente> encontrados = objnegcliente.Buscarclientes(txtbuscar.Text);
+            dgvclientes.DataSource = encontrados;
+            OcultarColumnas();
+            btnmodificar.Enabled = false;
+            btneliminar.Enabled = false;
+            if (encontrados.Count == 0)
+            {
+                MessageBox.Show("No se encontraron clientes con ese DNI/RUC o nombre.");
             }
         }
 
