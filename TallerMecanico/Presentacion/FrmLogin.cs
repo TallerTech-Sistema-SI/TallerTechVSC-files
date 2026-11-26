@@ -19,6 +19,7 @@ namespace Presentacion
         public FrmLogin()
         {
             InitializeComponent();
+            Tema.Aplicar(this);
         }
 
         private void btningresar_Click(object sender, EventArgs e)
