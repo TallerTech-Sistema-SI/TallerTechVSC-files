@@ -69,6 +69,23 @@ namespace Negocio
             return objDataorden.Listarordenesconcluidas(estado, fechainicio, fechafin);
         }
 
+        public List<OrdenServicio> Listarordenespormecanico(int idmecanico, string estado, DateTime fechainicio, DateTime fechafin)
+        {
+            List<OrdenServicio> lista = objDataorden.Listarordenes();
+            List<OrdenServicio> resultado = new List<OrdenServicio>();
+            foreach (OrdenServicio item in lista)
+            {
+                if (item.ID_Mecanico == idmecanico && item.Fecha.Date >= fechainicio.Date && item.Fecha.Date <= fechafin.Date)
+                {
+                    if (estado == "Todos" || item.Estado == estado)
+                    {
+                        resultado.Add(item);
+                    }
+                }
+            }
+            return resultado;
+        }
+
         public string Modificarorden(OrdenServicio objorden)
         {
             return objDataorden.Modificarorden(objorden);
