@@ -23,7 +23,6 @@ namespace Presentacion
 
         NOrdenServicio objnegorden = new NOrdenServicio();
         NRepuesto objnegrepuesto = new NRepuesto();
-        NCliente objnegcliente = new NCliente();
 
         public Form1()
         {
@@ -110,36 +109,28 @@ namespace Presentacion
 
         // ---------- Escritorio ----------
 
-        Panel Crearcarta(string titulo, string valor, Color color, int x)
+        Label Crearetiqueta(string texto, float tam, FontStyle estilo, Color color, int x, int y)
         {
-            Panel carta = new Panel();
-            carta.BackColor = Color.White;
-            carta.Location = new Point(x, 85);
-            carta.Size = new Size(190, 90);
+            Label lbl = new Label();
+            lbl.Text = texto;
+            lbl.Font = new Font("Segoe UI", tam, estilo);
+            lbl.ForeColor = color;
+            lbl.Location = new Point(x, y);
+            lbl.AutoSize = true;
+            return lbl;
+        }
 
-            Panel franja = new Panel();
-            franja.BackColor = color;
-            franja.Dock = DockStyle.Left;
-            franja.Width = 6;
-
-            Label lbltit = new Label();
-            lbltit.Text = titulo;
-            lbltit.Font = new Font("Segoe UI", 9F);
-            lbltit.ForeColor = Color.FromArgb(108, 117, 125);
-            lbltit.Location = new Point(16, 12);
-            lbltit.AutoSize = true;
-
-            Label lblval = new Label();
-            lblval.Text = valor;
-            lblval.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblval.ForeColor = color;
-            lblval.Location = new Point(14, 36);
-            lblval.AutoSize = true;
-
-            carta.Controls.Add(lblval);
-            carta.Controls.Add(lbltit);
-            carta.Controls.Add(franja);
-            return carta;
+        DataGridView Creargrilla()
+        {
+            DataGridView dgv = new DataGridView();
+            dgv.Dock = DockStyle.Fill;
+            dgv.ReadOnly = true;
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToResizeRows = false;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.Margin = new Padding(0, 6, 20, 0);
+            return dgv;
         }
 
         void Mostrarescritorio()
@@ -150,42 +141,25 @@ namespace Presentacion
             pnlescritorio = new Panel();
             pnlescritorio.Dock = DockStyle.Fill;
             pnlescritorio.BackColor = Tema.Fondo;
-
-            Label lblbienvenida = new Label();
-            lblbienvenida.Text = "Bienvenido, " + nombreusuario;
-            lblbienvenida.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            lblbienvenida.ForeColor = Tema.Azul;
-            lblbienvenida.Location = new Point(28, 18);
-            lblbienvenida.AutoSize = true;
-            pnlescritorio.Controls.Add(lblbienvenida);
-
-            Label lblfecha = new Label();
-            lblfecha.Text = "Rol: " + rolusuario + "   |   " + DateTime.Today.ToString("dd/MM/yyyy");
-            lblfecha.Font = new Font("Segoe UI", 10F);
-            lblfecha.ForeColor = Color.FromArgb(108, 117, 125);
-            lblfecha.Location = new Point(30, 52);
-            lblfecha.AutoSize = true;
-            pnlescritorio.Controls.Add(lblfecha);
+            pnlescritorio.Padding = new Padding(32, 0, 12, 24);
 
             List<OrdenServicio> ordenes = objnegorden.Listarordenes();
-            int pendientes = 0;
+            List<OrdenServicio> poratender = new List<OrdenServicio>();
             foreach (OrdenServicio o in ordenes)
             {
                 if (o.Estado == "Pendiente" || o.Estado == "En Proceso")
                 {
-                    pendientes = pendientes + 1;
+                    poratender.Add(o);
                 }
             }
-            int criticos = objnegrepuesto.Listarrepuestoscriticos().Count;
-            int totalclientes = objnegcliente.Listarclientes().Count;
+            List<Repuesto> criticos = objnegrepuesto.Listarrepuestoscriticos();
 
-            int x = 30;
-            pnlescritorio.Controls.Add(Crearcarta("Ordenes pendientes", pendientes.ToString(), Tema.AzulClaro, x));
-            x = x + 205;
-            pnlescritorio.Controls.Add(Crearcarta("Repuestos con stock critico", criticos.ToString(), Tema.Rojo, x));
-            x = x + 205;
-            pnlescritorio.Controls.Add(Crearcarta("Clientes registrados", totalclientes.ToString(), Tema.Verde, x));
-            x = x + 205;
+            Panel cabecera = new Panel();
+            cabecera.Dock = DockStyle.Top;
+            cabecera.Height = 130;
+            cabecera.Controls.Add(Crearetiqueta("Buen dia, " + nombreusuario, 18F, FontStyle.Bold, Tema.Texto, 0, 28));
+            string resumen = "Hay " + poratender.Count.ToString() + " ordenes por atender y " + criticos.Count.ToString() + " repuestos con stock critico.";
+            cabecera.Controls.Add(Crearetiqueta(resumen, 11F, FontStyle.Regular, Tema.Texto, 2, 68));
             if (rolusuario != "Recepcionista")
             {
                 decimal ingresosmes = 0;
@@ -195,44 +169,53 @@ namespace Presentacion
                 {
                     ingresosmes = ingresosmes + c.Total;
                 }
-                pnlescritorio.Controls.Add(Crearcarta("Ingresos del mes", "S/. " + ingresosmes.ToString("0.00"), Color.FromArgb(255, 153, 0), x));
+                cabecera.Controls.Add(Crearetiqueta("Ingresos del mes: S/. " + ingresosmes.ToString("0.00"), 11F, FontStyle.Regular, Tema.Texto, 2, 94));
             }
 
-            Label lblultimas = new Label();
-            lblultimas.Text = "Ultimas ordenes de servicio";
-            lblultimas.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            lblultimas.ForeColor = Color.FromArgb(73, 80, 87);
-            lblultimas.Location = new Point(28, 200);
-            lblultimas.AutoSize = true;
-            pnlescritorio.Controls.Add(lblultimas);
+            TableLayoutPanel tabla = new TableLayoutPanel();
+            tabla.Dock = DockStyle.Fill;
+            tabla.ColumnCount = 2;
+            tabla.RowCount = 2;
+            tabla.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 58F));
+            tabla.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 42F));
+            tabla.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+            tabla.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tabla.Controls.Add(Crearetiqueta("Ordenes por atender", 11F, FontStyle.Bold, Tema.Texto, 0, 0), 0, 0);
+            tabla.Controls.Add(Crearetiqueta("Repuestos por reponer", 11F, FontStyle.Bold, Tema.Texto, 0, 0), 1, 0);
 
-            DataGridView dgvultimas = new DataGridView();
-            dgvultimas.Location = new Point(30, 230);
-            dgvultimas.Size = new Size(pnlcontenido.ClientSize.Width - 60, 300);
-            dgvultimas.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
-            dgvultimas.ReadOnly = true;
-            dgvultimas.AllowUserToAddRows = false;
-            dgvultimas.AllowUserToResizeRows = false;
-            dgvultimas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvultimas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvultimas.Columns.Add("Orden", "N Orden");
-            dgvultimas.Columns.Add("Fecha", "Fecha");
-            dgvultimas.Columns.Add("Descripcion", "Falla / Servicio");
-            dgvultimas.Columns.Add("Estado", "Estado");
-            dgvultimas.Columns.Add("Total", "Total");
-            Tema.Estilargrilla(dgvultimas);
-
-            int mostradas = 0;
-            for (int i = ordenes.Count - 1; i >= 0; i--)
+            DataGridView dgvordenes = Creargrilla();
+            dgvordenes.Columns.Add("Orden", "N");
+            dgvordenes.Columns.Add("Fecha", "Fecha");
+            dgvordenes.Columns.Add("Descripcion", "Falla / Servicio");
+            dgvordenes.Columns.Add("Estado", "Estado");
+            dgvordenes.Columns["Orden"].FillWeight = 20;
+            dgvordenes.Columns["Fecha"].FillWeight = 40;
+            dgvordenes.Columns["Descripcion"].FillWeight = 100;
+            dgvordenes.Columns["Estado"].FillWeight = 50;
+            Tema.Estilargrilla(dgvordenes);
+            foreach (OrdenServicio item in poratender)
             {
-                if (mostradas < 8)
-                {
-                    OrdenServicio item = ordenes[i];
-                    dgvultimas.Rows.Add(item.ID_Orden, item.Fecha.ToString("dd/MM/yyyy"), item.Descripcion, item.Estado, "S/. " + item.Total.ToString("0.00"));
-                    mostradas = mostradas + 1;
-                }
+                dgvordenes.Rows.Add(item.ID_Orden, item.Fecha.ToString("dd/MM/yyyy"), item.Descripcion, item.Estado);
             }
-            pnlescritorio.Controls.Add(dgvultimas);
+            tabla.Controls.Add(dgvordenes, 0, 1);
+
+            DataGridView dgvrepuestos = Creargrilla();
+            dgvrepuestos.Margin = new Padding(0, 6, 0, 0);
+            dgvrepuestos.Columns.Add("Nombre", "Repuesto");
+            dgvrepuestos.Columns.Add("Stock", "Stock");
+            dgvrepuestos.Columns.Add("Minimo", "Minimo");
+            dgvrepuestos.Columns["Nombre"].FillWeight = 100;
+            dgvrepuestos.Columns["Stock"].FillWeight = 30;
+            dgvrepuestos.Columns["Minimo"].FillWeight = 30;
+            Tema.Estilargrilla(dgvrepuestos);
+            foreach (Repuesto r in criticos)
+            {
+                dgvrepuestos.Rows.Add(r.Nombre, r.Stock, r.StockMinimo);
+            }
+            tabla.Controls.Add(dgvrepuestos, 1, 1);
+
+            pnlescritorio.Controls.Add(tabla);
+            pnlescritorio.Controls.Add(cabecera);
             pnlcontenido.Controls.Add(pnlescritorio);
         }
 
