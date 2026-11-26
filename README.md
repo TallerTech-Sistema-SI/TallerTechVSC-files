@@ -36,10 +36,18 @@ Hecho en C# (WinForms, .NET Framework 4.7.2) con SQL Server y Entity Framework 6
 | RF-07 | Reporte de inventario y rotación | FrmConsultaRepuestos | NRepuesto / DRepuesto |
 | RF-08 | Reporte de órdenes por mecánico | FrmReporteMecanico | NOrdenServicio / DOrdenServicio |
 | RF-09 | Historial del vehículo y cliente | FrmHistorialVehiculo | NOrdenServicio, NVehiculo / DOrdenServicio |
-| RF-10 a RF-20 | Pendientes | | |
+| RF-10 | Gestión de mecánicos | FrmMecanico | NMecanico / DMecanico |
+| RF-11 | Inicio de sesión y control de acceso por rol | FrmLogin, Form1 | NUsuario / DUsuario |
+| RF-12 | Búsqueda de clientes | FrmCliente | NCliente / DCliente |
+| RF-13 | Búsqueda de vehículos por placa | FrmVehiculo | NVehiculo / DVehiculo |
+| RF-14 | Filtro de órdenes por rango de fechas | FrmConsultaOrdenes | NOrdenServicio / DOrdenServicio |
+| RF-15 | Búsqueda de repuestos | FrmRepuesto | NRepuesto / DRepuesto |
+| RF-16 a RF-20 | Pendientes | | |
 
-Otros archivos: FrmLogin (acceso por usuario y rol), Form1 (menú principal), FrmMecanico (registro de mecánicos).
+Otros archivos: Form1 (menú principal).
 
 ## Ramas
 
 - main: versión estable para entregar.
+- desarrollo: rama de integración, aquí se unen los RF nuevos antes de pasar a main.
+- rf-XX-nombre: una rama por cada RF, creada desde desarrollo y unida con Pull Request.

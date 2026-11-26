@@ -42,6 +42,30 @@ namespace Negocio
             return objDatarepuesto.Listarrepuestos();
         }
 
+        public List<Repuesto> Buscarrepuestos(string texto)
+        {
+            List<Repuesto> lista = objDatarepuesto.Listarrepuestos();
+            List<Repuesto> resultado = new List<Repuesto>();
+            string buscar = texto.Trim().ToLower();
+            foreach (Repuesto item in lista)
+            {
+                bool coincide = false;
+                if (item.Nombre != null && item.Nombre.ToLower().Contains(buscar))
+                {
+                    coincide = true;
+                }
+                if (item.Codigo != null && item.Codigo.ToLower().Contains(buscar))
+                {
+                    coincide = true;
+                }
+                if (coincide)
+                {
+                    resultado.Add(item);
+                }
+            }
+            return resultado;
+        }
+
         public List<Repuesto> Listarrepuestoscriticos()
         {
             return objDatarepuesto.Listarrepuestoscriticos();

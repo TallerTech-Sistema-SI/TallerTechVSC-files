@@ -31,6 +31,9 @@ namespace Presentacion
             this.btneliminar = new System.Windows.Forms.Button();
             this.btnlimpiar = new System.Windows.Forms.Button();
             this.btnsalir = new System.Windows.Forms.Button();
+            this.lblbuscar = new System.Windows.Forms.Label();
+            this.txtbuscar = new System.Windows.Forms.TextBox();
+            this.btnbuscar = new System.Windows.Forms.Button();
             this.dgvclientes = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvclientes)).BeginInit();
             this.SuspendLayout();
@@ -173,6 +176,35 @@ namespace Presentacion
             this.btnsalir.UseVisualStyleBackColor = true;
             this.btnsalir.Click += new System.EventHandler(this.btnsalir_Click);
             // 
+            // lblbuscar
+            // 
+            this.lblbuscar.AutoSize = true;
+            this.lblbuscar.Location = new System.Drawing.Point(19, 172);
+            this.lblbuscar.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblbuscar.Name = "lblbuscar";
+            this.lblbuscar.Size = new System.Drawing.Size(43, 13);
+            this.lblbuscar.TabIndex = 15;
+            this.lblbuscar.Text = "Buscar:";
+            // 
+            // txtbuscar
+            // 
+            this.txtbuscar.Location = new System.Drawing.Point(90, 169);
+            this.txtbuscar.Margin = new System.Windows.Forms.Padding(2);
+            this.txtbuscar.Name = "txtbuscar";
+            this.txtbuscar.Size = new System.Drawing.Size(180, 20);
+            this.txtbuscar.TabIndex = 16;
+            // 
+            // btnbuscar
+            // 
+            this.btnbuscar.Location = new System.Drawing.Point(276, 166);
+            this.btnbuscar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnbuscar.Name = "btnbuscar";
+            this.btnbuscar.Size = new System.Drawing.Size(70, 24);
+            this.btnbuscar.TabIndex = 17;
+            this.btnbuscar.Text = "Buscar";
+            this.btnbuscar.UseVisualStyleBackColor = true;
+            this.btnbuscar.Click += new System.EventHandler(this.btnbuscar_Click);
+            // 
             // dgvclientes
             // 
             this.dgvclientes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -195,6 +227,9 @@ namespace Presentacion
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(525, 378);
             this.Controls.Add(this.dgvclientes);
+            this.Controls.Add(this.btnbuscar);
+            this.Controls.Add(this.txtbuscar);
+            this.Controls.Add(this.lblbuscar);
             this.Controls.Add(this.btnsalir);
             this.Controls.Add(this.btnlimpiar);
             this.Controls.Add(this.btneliminar);
@@ -237,6 +272,9 @@ namespace Presentacion
         private System.Windows.Forms.Button btnlimpiar;
         private System.Windows.Forms.Button btnsalir;
         private System.Windows.Forms.DataGridView dgvclientes;
+        private System.Windows.Forms.Label lblbuscar;
+        private System.Windows.Forms.TextBox txtbuscar;
+        private System.Windows.Forms.Button btnbuscar;
     }
 }
 

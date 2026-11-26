@@ -35,6 +35,28 @@ namespace Negocio
             }
         }
 
+        public List<OrdenServicio> Listarordenesporestadoyfechas(string estado, DateTime fechainicio, DateTime fechafin)
+        {
+            List<OrdenServicio> lista = null;
+            if (estado == "Todos")
+            {
+                lista = objDataorden.Listarordenes();
+            }
+            else
+            {
+                lista = objDataorden.Listarordenesporestado(estado);
+            }
+            List<OrdenServicio> resultado = new List<OrdenServicio>();
+            foreach (OrdenServicio item in lista)
+            {
+                if (item.Fecha.Date >= fechainicio.Date && item.Fecha.Date <= fechafin.Date)
+                {
+                    resultado.Add(item);
+                }
+            }
+            return resultado;
+        }
+
         public List<OrdenServicio> Listarhistorialvehiculo(int idvehiculo)
         {
             List<OrdenServicio> lista = objDataorden.Listarordenes();

@@ -32,9 +32,8 @@ namespace Presentacion
             cboxcliente.SelectedIndex = -1;
         }
 
-        void ActualizarDataGridView()
+        void OcultarColumnas()
         {
-            dgvvehiculos.DataSource = objnegvehiculo.Listarvehiculos();
             if (dgvvehiculos.Columns["ID_Vehiculo"] != null)
             {
                 dgvvehiculos.Columns["ID_Vehiculo"].Visible = false;
@@ -67,8 +66,15 @@ namespace Presentacion
             {
                 dgvvehiculos.Columns["OrdenServicio"].Visible = false;
             }
+        }
+
+        void ActualizarDataGridView()
+        {
+            dgvvehiculos.DataSource = objnegvehiculo.Listarvehiculos();
+            OcultarColumnas();
             btnmodificar.Enabled = false;
             btneliminar.Enabled = false;
+            txtbuscar.Text = "";
             cboxcliente.SelectedIndex = -1;
             txtplaca.Text = "";
             txtmarca.Text = "";
@@ -202,6 +208,24 @@ namespace Presentacion
                 string mensaje = objnegvehiculo.Eliminarvehiculo(id);
                 MessageBox.Show(mensaje);
                 ActualizarDataGridView();
+            }
+        }
+
+        private void btnbuscar_Click(object sender, EventArgs e)
+        {
+            if (txtbuscar.Text.Trim() == "")
+            {
+                MessageBox.Show("Ingrese una placa para buscar.");
+                return;
+            }
+            List<Vehiculo> encontrados = objnegvehiculo.Buscarvehiculosporplaca(txtbuscar.Text);
+            dgvvehiculos.DataSource = encontrados;
+            OcultarColumnas();
+            btnmodificar.Enabled = false;
+            btneliminar.Enabled = false;
+            if (encontrados.Count == 0)
+            {
+                MessageBox.Show("No se encontraron vehiculos con esa placa.");
             }
         }
 
