@@ -1,6 +1,6 @@
 # TallerTech
 
-Sistema de gestión para un taller mecánico. Trabajo final del curso 1ASI0393 Fundamentos de Sistemas de Información (UPC)
+Sistema de gestión para un taller mecánico.
 
 Hecho en C# (WinForms, .NET Framework 4.7.2) con SQL Server y Entity Framework 6 (.edmx).
 
