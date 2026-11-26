@@ -28,6 +28,30 @@ namespace Negocio
             return objDatacliente.Listarclientes();
         }
 
+        public List<Cliente> Buscarclientes(string texto)
+        {
+            List<Cliente> lista = objDatacliente.Listarclientes();
+            List<Cliente> resultado = new List<Cliente>();
+            string buscar = texto.Trim().ToLower();
+            foreach (Cliente item in lista)
+            {
+                bool coincide = false;
+                if (item.DNI_RUC != null && item.DNI_RUC.ToLower().Contains(buscar))
+                {
+                    coincide = true;
+                }
+                if (item.Nombre != null && item.Nombre.ToLower().Contains(buscar))
+                {
+                    coincide = true;
+                }
+                if (coincide)
+                {
+                    resultado.Add(item);
+                }
+            }
+            return resultado;
+        }
+
         public string Modificarcliente(Cliente objcliente)
         {
             return objDatacliente.Modificarcliente(objcliente);
