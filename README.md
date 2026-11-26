@@ -20,7 +20,7 @@ Hecho en C# (WinForms, .NET Framework 4.7.2) con SQL Server y Entity Framework 6
 
 ## Roles
 
-- Administrador: acceso a todo.
+- Administrador: acceso a todo. 
 - Recepcionista: no puede registrar mecánicos ni repuestos, ni ver reportes de ingresos ni de mecánicos.
 
 ## Requerimientos funcionales y archivos
@@ -42,7 +42,6 @@ Hecho en C# (WinForms, .NET Framework 4.7.2) con SQL Server y Entity Framework 6
 | RF-13 | Búsqueda de vehículos por placa | FrmVehiculo | NVehiculo / DVehiculo |
 | RF-14 | Filtro de órdenes por rango de fechas | FrmConsultaOrdenes | NOrdenServicio / DOrdenServicio |
 | RF-15 | Búsqueda de repuestos | FrmRepuesto | NRepuesto / DRepuesto |
-| RF-16 a RF-20 | Pendientes | | |
 
 Otros archivos: Form1 (menú principal).
 
